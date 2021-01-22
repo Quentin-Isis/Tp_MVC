@@ -91,6 +91,12 @@ public class TableauController {
     @GetMapping(path = "delete")
     public String supprimeUneCategoriePuisMontreLaListe(@RequestParam("id") Tableau tableau, RedirectAttributes redirectInfo) {
         String message = "Le tableau '" + tableau.getTitre() + "' a bien été supprimé";
+        try {
+            dao.delete(tableau); // Ici on peut avoir une erreur (Si il y a des expositions pour cette galerie par exemple)
+        } catch (DataIntegrityViolationException e) {
+            // violation de contrainte d'intégrité si on essaie de supprimer une galerie qui a des expositions
+            message = "Erreur : Impossible de supprimer le tableau '" + tableau.getTitre() + "', il faut d'abord supprimer ses expositions";
+        }
         // RedirectAttributes permet de transmettre des informations lors d'une redirection,
         // Ici on transmet un message de succès ou d'erreur
         // Ce message est accessible et affiché dans la vue 'afficheGalerie.html'

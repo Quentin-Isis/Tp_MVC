@@ -20,7 +20,8 @@
 				<!--/* th:field définit quel champ de l'objet est édité par cette zone de saisie */-->
 				<input type="text" th:field="*{titre}" placeholder="Titre du tableau"/>
                                 <hr/>
-				<input type="submit" value="Enregistrer" /> <input type="reset" value="Réinitialiser" />
+				<input type="submit" value="Enregistrer" /> 
+                                <input type="reset" value="Réinitialiser" />
 			</div>
 			<div class="column">
 				<label for="support">Support:</label>
@@ -30,6 +31,11 @@
 				<label for="dimention">Dimension:</label>
 				<input type="text" th:field="*{dimension}" placeholder="Dimension de la peinture"/>				
 			</div>
+                        <div class="column">
+                            <select name="artiste">
+                            <option> 
+                            </select>
+                        </div>
 		</form>		
 		<hr/>
 		<a th:href="@{/}" href="../static/index.html">Retour au menu</a>
