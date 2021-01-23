@@ -32,8 +32,10 @@
 				<input type="text" th:field="*{dimension}" placeholder="Dimension de la peinture"/>				
 			</div>
                         <div class="column">
-                            <select name="artiste">
-                            <option> 
+                            <label for="auteur">Auteur :</label>
+                            <select name="auteur" id="auteurs">
+                                <option th:value="${a.id}" th:each="a:${artistes}">[[${a.nom}]]</option>
+                                <option th:value="null">Auteur inconnu</option>
                             </select>
                         </div>
 		</form>		

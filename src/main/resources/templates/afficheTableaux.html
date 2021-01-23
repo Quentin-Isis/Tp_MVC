@@ -23,6 +23,7 @@ and open the template in the editor.
                         <th>Titre</th>
                         <th>Support</th>
                         <th>Dimension</th>
+                        <th>Auteur</th>
                     </tr>
                 </thead>
                 <tbody th:each="t: ${tableaux}">
@@ -30,6 +31,8 @@ and open the template in the editor.
                         <td><em th:text="${t.titre}"/></td>
                         <td><em th:text="${t.support}"/></td>
                         <td><em th:text="${t.dimension}"/></td>
+                        <td th:if="${t.auteur == null}">Auteur inconnu</td>
+                        <td th:unless="${t.auteur==Null}">[[${t.auteur.nom}]]</td>
                     </tr>
                     <tr>
                         <td><a th:href="@{delete(id=${t.id})}">Supprimer le tableau n° [[${t.id}]]</a></td>

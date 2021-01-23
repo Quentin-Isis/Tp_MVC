@@ -33,20 +33,15 @@ public class ExpositionRepositoryTest {
                 "Le CA de cette exposition est de 3000.03f" );
     }
     
-    @Test // On utilise les données de 'data.sql' qui sont pré-chargées
-    public void onSaitCalculerLeCADuneExpositionAvecJointure() {
-        String intitule = "Painters' painters";
-        log.info("On calcule le CA de l'exposition {} en JPQL", intitule);
-        assertEquals(3000.03f, expositionDAO.chiffreAffairePour(intitule), 0.001f, 
-                "Le CA de cette exposition est de 3000.03f" );
+     @Test
+    @Sql("test-data.sql") // On peut charger des donnnées spécifiques pour un test
+    public void onSaitCompterLesEnregistrements() {
+        log.info("On compte les enregistrements de la table 'Galerie'");
+        log.info("On compte les enregistrements de la table 'Exposition'");
+        int combienDansLeJeuDeTest = 2; 
+        long nombre = expositionDAO.count();
+        assertEquals(combienDansLeJeuDeTest, nombre, "On doit trouver 2 galeries" );
+        assertEquals(combienDansLeJeuDeTest, nombre, "On doit trouver 2 expositions" );
     }
-
-    @Test // On utilise les données de 'data.sql' qui sont pré-chargées
-    public void renvoieNullSiPasDEnregistrement() {
-        int idExposition = 999;
-        log.info("On calcule le CA de l'exposition {} en JPQL", idExposition);
-        assertNull(expositionDAO.chiffreAffairePour(idExposition),
-            "Cette expo n'existe pas, le résultat est null, et non pas 0.0f" );
-    }
-
+    
 }
